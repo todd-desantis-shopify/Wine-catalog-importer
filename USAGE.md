@@ -8,18 +8,24 @@ This guide shows you the **correct order** to set up and use the wine importer.
 Create all wine metafield definitions in your Shopify store:
 
 ```bash
+# Option A: Enhanced metafields with categories (Recommended)
+python3 setup_enhanced_metafields.py
+
+# Option B: Basic metafields 
 python3 setup_metafields.py
 ```
 
-**This creates 16 organized metafields:**
-- 🍷 **Wine Details**: varietal, vintage, ABV, body, style, size, type
-- 🌍 **Location**: appellation, region, country/state  
-- 👃 **Tasting**: tasting notes
-- ⭐ **Ratings**: expert ratings, customer ratings, review count
-- 💰 **Pricing**: mix-6 pricing
-- 🔗 **Reference**: source URL
+**Enhanced setup creates 16 categorized metafields:**
+- 🍷 **Wine Details** (7): varietal, vintage, ABV, body, style, size, type
+- 🌍 **Location** (3): appellation, region, country/state  
+- 👃 **Tasting** (1): tasting notes
+- ⭐ **Ratings** (3): expert ratings, customer ratings, review count
+- 💰 **Pricing** (1): mix-6 pricing
+- 🔗 **Reference** (1): source URL
 
 **✅ Run this ONCE per Shopify store**
+**✅ Uses latest API version (2024-10)**
+**✅ Metafields appear organized by category in Shopify Admin**
 
 ### **Step 2: Setup Collections (Run Once)**
 Create organized collections for better wine browsing:

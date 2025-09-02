@@ -186,7 +186,7 @@ def main():
     success_count = 0
     
     for collection_data in collections:
-        url = f"{SHOP_URL}/admin/api/2023-10/collections.json"
+        url = f"{SHOP_URL}/admin/api/2024-10/collections.json"
         payload = {"collection": collection_data}
         
         try:

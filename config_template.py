@@ -9,7 +9,7 @@ SHOPIFY_CONFIG = {
     'ACCESS_TOKEN': 'YOUR_ACCESS_TOKEN_HERE',
     
     # API version (leave as is unless you need a specific version)
-    'API_VERSION': '2023-10',
+    'API_VERSION': '2024-10',
 }
 
 # To get your Shopify API credentials:

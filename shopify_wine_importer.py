@@ -293,7 +293,7 @@ class ShopifyWineImporter:
                 }
             }
             
-            url = f"{self.shop_url}/admin/api/2023-10/metafield_definitions.json"
+            url = f"{self.shop_url}/admin/api/2024-10/metafield_definitions.json"
             
             try:
                 response = requests.post(url, headers=self.headers, json=definition)
@@ -316,7 +316,7 @@ class ShopifyWineImporter:
             print("⚠️ Shopify credentials not provided - skipping API calls")
             return False
         
-        url = f"{self.shop_url}/admin/api/2023-10/products.json"
+        url = f"{self.shop_url}/admin/api/2024-10/products.json"
         
         try:
             response = requests.post(url, headers=self.headers, json=product_data)
