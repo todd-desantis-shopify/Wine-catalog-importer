@@ -177,8 +177,9 @@ def main():
                     "storefront": "PUBLIC_READ"
                 },
                 # This assigns the metafield to Wine products in Shopify's taxonomy
+                # Note: You may need to find the correct Wine category ID in your Shopify admin
                 "category_assignments": [
-                    "gid://shopify/TaxonomyCategory/aa-2-2-2"  # Wine category ID
+                    "gid://shopify/TaxonomyCategory/aa-2-2-2"  # Wine category - verify this ID
                 ]
             }
         }
@@ -223,11 +224,14 @@ def main():
             print(f"  • wine.{field['key']}")
         print()
         print("🔄 Next steps:")
-        print("  1. Assign your products to 'Wine' category in Shopify taxonomy")
+        print("  1. Verify Wine category ID in Shopify Admin → Settings → Metafields")
         print("  2. python3 setup_collections.py (create collections)")
         print("  3. python3 import_wines.py your_catalog.csv (import wines)")
         print()
-        print("💡 Note: Products must be categorized as 'Wine' to use these metafields!")
+        print("💡 Important Notes:")
+        print("  • Products are automatically categorized as 'Wine' during import")
+        print("  • If metafields don't appear, verify the Wine category ID is correct")
+        print("  • You can find the correct ID in Shopify Admin → Settings → Metafields")
     else:
         print()
         print("❌ Some metafields failed. Check API credentials and try again.")
