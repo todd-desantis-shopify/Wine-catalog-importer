@@ -256,6 +256,10 @@ class ShopifyWineImporter:
                     "product_type": wine.wine_type,
                     "handle": handle,
                     "tags": f"{wine.varietal}, {wine.wine_type}, {wine.region}, {wine.appellation}",
+                    # Assign to Wine category in Shopify's Standard Product Taxonomy
+                    "category": {
+                        "id": "gid://shopify/TaxonomyCategory/aa-2-2-2"  # Wine category
+                    },
                     "variants": [
                         {
                             "price": str(price),
