@@ -377,18 +377,25 @@ class ShopifyWineImporter:
                     # Now add metafields to the created product
                     metafields_success = self.add_metafields_to_product(product_id_str, product_info['metafields'])
                     
-                    # Add wine bottle image
+                    # Add wine bottle image (non-critical)
                     variant_sku = product_info['variants'][0]['sku']
                     image_success = self.add_wine_image(product_id_str, variant_sku)
                     
-                    # Set inventory at all locations
+                    # Set inventory at all locations (non-critical)
                     inventory_success = self.set_product_inventory(product_id_str, 100)
                     
+                    # Return success if product and metafields were created successfully
+                    # Image and inventory failures are non-critical warnings
                     return metafields_success
                 else:
                     errors = data.get('data', {}).get('productCreate', {}).get('userErrors', [])
-                    print(f"❌ Failed to create product: {errors}")
-                    return False
+                    # Check if it's just a duplicate handle (existing product)
+                    if any("Handle" in str(error) and "already in use" in str(error) for error in errors):
+                        print(f"⚠️ Product already exists, skipping: {product_info['title']}")
+                        return True  # Return True to continue with next product
+                    else:
+                        print(f"❌ Failed to create product: {errors}")
+                        return False
             else:
                 print(f"❌ Failed to create product: {response.status_code}")
                 print(f"Response: {response.text}")
@@ -429,16 +436,22 @@ class ShopifyWineImporter:
     def add_wine_image(self, product_id: str, sku: str) -> bool:
         """Add wine bottle image to product using Total Wine image URL pattern"""
         try:
+            import time
+            
             # Construct Total Wine image URL from SKU
             base_sku = sku.split('-')[0] if '-' in sku else sku
             image_url = f"https://www.totalwine.com/images/{base_sku}/{base_sku}-1-fr.png"
             
             print(f"🖼️ Adding image: {image_url}")
             
+            # Add small delay to avoid rate limiting
+            time.sleep(0.5)
+            
             image_data = {
                 "image": {
                     "src": image_url,
-                    "alt": f"Wine bottle image"
+                    "alt": f"Wine bottle image",
+                    "filename": f"{base_sku}.png"
                 }
             }
             
@@ -451,6 +464,8 @@ class ShopifyWineImporter:
                 return True
             else:
                 print(f"   ❌ Image upload failed: {response.status_code}")
+                if response.text:
+                    print(f"      Error details: {response.text}")
                 return False
                 
         except Exception as e:

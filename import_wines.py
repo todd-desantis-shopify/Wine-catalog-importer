@@ -84,11 +84,14 @@ def main():
         else:
             print("❌")
             
-            # Ask if they want to continue
+            # Ask if they want to continue (only for actual critical failures)
             if i < len(shopify_products):
-                response = input("    Continue importing? (y/n): ").lower()
-                if response not in ['y', 'yes']:
-                    break
+                # Auto-continue for bulk imports - only pause on critical errors
+                print("    ⚠️ Continuing with next product (non-critical error)...")
+                # Uncomment below if you want manual prompts:
+                # response = input("    Continue importing? (y/n): ").lower()
+                # if response not in ['y', 'yes']:
+                #     break
     
     # Summary
     print()
