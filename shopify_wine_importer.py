@@ -142,6 +142,7 @@ class ShopifyWineImporter:
             vintage = self.extract_vintage_from_name(wine.name)
             handle = self.generate_handle(wine.name)
             price = self.clean_price(wine.price)
+            mix_6_price = self.clean_price(wine.mix_6_price) if wine.mix_6_price and wine.mix_6_price != "No bulk pricing" else None
             abv = self.clean_abv(wine.abv)
             
             # Build metafields
@@ -264,6 +265,7 @@ class ShopifyWineImporter:
                     "variants": [
                         {
                             "price": str(price),
+                            "compare_at_price": str(mix_6_price) if mix_6_price and mix_6_price != price else None,
                             "sku": wine.sku,
                             "inventory_management": "shopify",
                             "inventory_policy": "deny", 
@@ -327,7 +329,7 @@ class ShopifyWineImporter:
             product_info = product_data['product']
             variant = product_info['variants'][0]
             
-            # GraphQL mutation for product creation
+            # GraphQL mutation for product creation with variant pricing
             create_mutation = """
             mutation productCreate($input: ProductInput!) {
               productCreate(input: $input) {
@@ -338,6 +340,16 @@ class ShopifyWineImporter:
                     id
                     name
                   }
+                  variants(first: 1) {
+                    edges {
+                      node {
+                        id
+                        price
+                        compareAtPrice
+                        sku
+                      }
+                    }
+                  }
                 }
                 userErrors {
                   field
@@ -347,7 +359,8 @@ class ShopifyWineImporter:
             }
             """
             
-            # Convert product data to GraphQL format
+            # Convert product data to GraphQL format including variants with pricing
+            variant = product_info['variants'][0]
             variables = {
                 "input": {
                     "title": product_info['title'],
@@ -356,7 +369,15 @@ class ShopifyWineImporter:
                     "productType": product_info['product_type'],
                     "handle": product_info['handle'],
                     "tags": product_info['tags'].split(', '),
-                    "category": product_info['category']['id']
+                    "category": product_info['category']['id'],
+                    "variants": [
+                        {
+                            "price": variant['price'],  # Regular selling price
+                            "sku": variant['sku'],
+                            "inventoryManagement": "SHOPIFY",
+                            "inventoryPolicy": "DENY"
+                        }
+                    ]
                 }
             }
             
