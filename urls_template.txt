@@ -1,0 +1,16 @@
+# URL Template - One product URL per line
+# Copy this to urls.txt and add your product URLs
+
+# Example Total Wine red wines:
+https://www.totalwine.com/wine/red-wine/cabernet-sauvignon/1858-by-caymus-vineyards-cabernet-sauvignon-paso-robles/p/214578750
+https://www.totalwine.com/wine/red-wine/sangiovese/tenuta-di-renieri-chianti-classico-riserva/p/113708750
+
+# Example Total Wine white wines:
+https://www.totalwine.com/wine/white-wine/chardonnay/rock-view-chardonnay-reserve-mendocino-by-rob-lloyd/p/117938750
+https://www.totalwine.com/wine/white-wine/pinot-grigio/tesoro-della-regina-pinot-grigio/p/138064750
+
+# Example Total Wine rosé wines:
+https://www.totalwine.com/wine/rose-wine/rose/aix-rose/p/110240750
+
+# Add your product URLs below (one per line):
+

@@ -2,11 +2,29 @@
 
 Simple, modular system for crawling product data and importing to Shopify.
 
+## ⚙️ Setup
+
+1. **Copy config template:**
+   ```bash
+   cp config_template.py config.py
+   # Edit config.py with your Shopify credentials
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Customize fields to extract** in `config/sites/totalwine.yaml`:
+   - Set `enabled: true` for fields you want
+   - Set `enabled: false` to skip fields
+
 ## 🚀 Quick Start
 
 ### 1. Crawl Products
 ```bash
-python3 crawler/crawl.py --site totalwine --product wine --urls urls.txt --output wines.csv
+# Create urls.txt with product URLs (see urls_template.txt)
+python3 crawler/simple_crawl.py --site totalwine --product wine --urls urls.txt --output wines.csv
 ```
 
 ### 2. Setup Shopify
@@ -16,7 +34,7 @@ python3 setup/setup_shopify.py --product wine
 
 ### 3. Import to Shopify  
 ```bash
-python3 import_wines.py  # Uses your existing importer
+python3 import_wines.py  # Uses existing importer with CSV
 ```
 
 ## 📁 Structure

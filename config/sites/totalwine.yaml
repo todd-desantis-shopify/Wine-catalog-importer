@@ -6,6 +6,73 @@ site:
   timeout: 30
   user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 
+# Fields to extract - customize what you want to crawl
+# Set enabled: true for fields you want, false to skip
+fields_to_extract:
+  - field: "name"
+    enabled: true
+    required: true
+  - field: "brand"
+    enabled: true
+    required: true
+  - field: "price"
+    enabled: true
+    required: true
+  - field: "compare_at_price"
+    enabled: true      # Real promotional pricing
+    required: false
+  - field: "mix_6_price"
+    enabled: true      # Bulk discount pricing
+    required: false
+  - field: "sku"
+    enabled: true
+    required: true
+  - field: "image_url"
+    enabled: true
+    required: false
+  - field: "country"
+    enabled: true      # Wine origin
+    required: false
+  - field: "region"
+    enabled: true
+    required: false
+  - field: "appellation"
+    enabled: true
+    required: false
+  - field: "varietal"
+    enabled: true      # Grape type
+    required: false
+  - field: "wine_type"
+    enabled: true      # Red/White/Rosé
+    required: false
+  - field: "style"
+    enabled: true      # Elegant/Intense/etc
+    required: false
+  - field: "abv"
+    enabled: true      # Alcohol %
+    required: false
+  - field: "taste_notes"
+    enabled: true
+    required: false
+  - field: "body"
+    enabled: true      # Light/Medium/Full
+    required: false
+  - field: "customer_rating"
+    enabled: true
+    required: false
+  - field: "customer_reviews"
+    enabled: true
+    required: false
+  - field: "expert_rating"
+    enabled: true
+    required: false
+  - field: "size"
+    enabled: true
+    required: false
+  - field: "highlights"
+    enabled: true
+    required: false
+
 # Product page patterns
 product_pages:
   wine:
