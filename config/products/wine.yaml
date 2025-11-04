@@ -1,120 +1,143 @@
 # Wine Product Configuration
 product_type: "wine"
 
-# Standard CSV fields for wine products
+# Fields to extract - customize what you want to crawl
+# Set enabled: true for fields you want, false to skip
 fields:
   # Basic product info
   - name: "name"
     type: "string"
     required: true
+    enabled: true
     shopify_field: "title"
     
   - name: "brand"
     type: "string" 
     required: true
+    enabled: true
     shopify_field: "vendor"
     
   - name: "country"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.country"
     
   - name: "region"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.region"
     
   - name: "appellation"  
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.appellation"
     
   - name: "wine_type"
     type: "string"
     required: false
+    enabled: true
     shopify_field: "product_type"
     
   - name: "varietal"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.varietal"
     
   - name: "style"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.style"
     
   - name: "abv"
     type: "number_decimal"
     required: false
+    enabled: true
     shopify_metafield: "wine.abv"
     
   - name: "taste_notes"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.taste_notes"
     
   - name: "body"
     type: "string"
-    required: false  
+    required: false
+    enabled: true
     shopify_metafield: "wine.body"
     
   # Pricing
   - name: "price"
     type: "money"
     required: true
+    enabled: true
     shopify_field: "variant.price"
     
   - name: "compare_at_price"
     type: "money"
     required: false
+    enabled: true
     shopify_field: "variant.compare_at_price"
     
   - name: "mix_6_price"
     type: "money"
     required: false
+    enabled: true
     shopify_metafield: "wine.mix_6_price"
     
   # Reviews and ratings  
   - name: "customer_rating"
     type: "number_decimal"
     required: false
+    enabled: true
     shopify_metafield: "wine.customer_rating"
     
   - name: "customer_reviews"
     type: "number_integer"
     required: false
+    enabled: true
     shopify_metafield: "wine.customer_reviews"
     
   - name: "expert_rating"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.expert_rating"
     
   # Product details
   - name: "sku"
     type: "string"
     required: true
+    enabled: true
     shopify_field: "variant.sku"
     
   - name: "size"
     type: "string"
     default: "750ml"
+    enabled: true
     shopify_metafield: "wine.size"
     
   - name: "url"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.source_url"
     
   - name: "image_url"
     type: "string" 
     required: false
+    enabled: true
     shopify_field: "images"
     
   - name: "highlights"
     type: "string"
     required: false
+    enabled: true
     shopify_metafield: "wine.highlights"
 
 # Collection rules - how to automatically create collections

@@ -11,45 +11,55 @@ cp config_template.py config.py
 ```python
 SHOPIFY_CONFIG = {
     'SHOP_URL': 'https://your-store.myshopify.com',
-    'ACCESS_TOKEN': 'shpat_xxxxx...',
-    'API_VERSION': '2024-10',
+    'ACCESS_TOKEN': 'shpat_xxxxx...',  # From Shopify Admin
 }
 ```
 
-## 2. Create URL List
+## 2. Create Collection URL List
 
 **Copy and edit:**
 ```bash
-cp urls_template.txt urls.txt
+cp collections_template.txt collections.txt
 ```
 
-**Add your product URLs** (one per line):
+**Add collection page URLs** (one per line):
 ```
-https://www.totalwine.com/wine/red-wine/cabernet/.../p/214578750
-https://www.totalwine.com/wine/white-wine/chardonnay/.../p/117938750
+https://www.totalwine.com/wine/red-wine/c/000009
+https://www.totalwine.com/wine/white-wine/c/000002
 ```
+
+The crawler will:
+1. Visit each collection page
+2. Extract all product detail URLs
+3. Crawl each product page
+4. Output Shopify CSV
 
 ## 3. Customize Fields to Extract
 
-**Edit `config/sites/totalwine.yaml`:**
+**Edit `config/products/wine.yaml`** (or create new product configs):
 
-Turn fields on/off as needed:
+Turn fields on/off:
 ```yaml
-fields_to_extract:
-  - field: "name"
-    enabled: true       # Always extract
+fields:
+  - name: "name"
+    enabled: true       # Include this field
     required: true
   
-  - field: "expert_rating"
+  - name: "expert_rating"
     enabled: false      # Skip this field
     required: false
 ```
 
-For a **different site** (like Amazon):
-1. Copy `config/sites/totalwine.yaml` to `config/sites/amazon.yaml`
-2. Update `fields_to_extract` for what Amazon has
-3. Update CSS selectors for Amazon's page structure
+**For different product types:**
+- Copy `config/products/wine.yaml` → `config/products/electronics.yaml`
+- Update fields list for electronics (model, specs, warranty, etc.)
+- Set `enabled: true` for fields that product type has
+
+**For different sites:**
+- Copy `config/sites/totalwine.yaml` → `config/sites/amazon.yaml`  
+- Update `collection_page` selectors for how Amazon structures links
+- Update `selectors` for Amazon's product page HTML
 
 ## That's it!
 
-Three simple config files determine everything the crawler does.
+Two simple YAML files control everything.
