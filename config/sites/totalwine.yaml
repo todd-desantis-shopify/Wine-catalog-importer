@@ -1,0 +1,75 @@
+# Total Wine & More Site Configuration
+site:
+  name: "Total Wine & More"
+  base_url: "https://www.totalwine.com"
+  rate_limit: 0.5  # seconds between requests
+  timeout: 30
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+
+# Product page patterns
+product_pages:
+  wine:
+    url_pattern: "/wine/{category}/{varietal}/{product-name}/p/{sku}"
+    list_pages:
+      red_wine: "/wine/red-wine/c/000009"
+      white_wine: "/wine/white-wine/c/000002"  
+      rose_wine: "/wine/rose-wine/c/000003"
+    
+# CSS Selectors for data extraction
+selectors:
+  product_name: "h1"
+  brand: "a[href*='/wine/brand/']"
+  price: 
+    current: "text*='$'"  # Look for price patterns
+    compare_at: "text*='Previously'"
+  mix_6_price: "text*='Mix 6 for'"
+  
+  # Product details section
+  details:
+    country: "text*='Country / State' + a"
+    region: "text*='Region' + a"
+    appellation: "text*='Appellation' + a"
+    varietal: "text*='Varietal' + a"
+    wine_type: "text*='Wine Type' + a"
+    style: "text*='Style'"
+    abv: "text*='ABV'"
+    body: "text*='Body'"
+    
+  # Ratings and reviews
+  customer_rating: "[class*='rating']"
+  customer_reviews: "text*='Reviews'"
+  expert_rating: "text*='•'"
+  
+  # Product highlights and tasting notes
+  highlights: "h3:contains('Product Highlights') + p"
+  tasting_notes: "text*='Taste'"
+  
+  # Images
+  main_image: "img[alt*='750ml']"
+  
+  # SKU (from URL or page)
+  sku: "[data-sku], text*='SKU'"
+
+# Data transformation rules
+transformations:
+  price:
+    # Extract numeric value from "$19.99" 
+    pattern: "\\$([0-9]+\\.?[0-9]*)"
+    type: "float"
+    
+  abv:
+    # Extract percentage from "14.5%"
+    pattern: "([0-9]+\\.?[0-9]*)%"
+    type: "float"
+    
+  rating:
+    # Extract rating from "4.2 out of 5"
+    pattern: "([0-9]+\\.?[0-9]*) out of"
+    type: "float"
+
+# Error handling
+error_handling:
+  max_retries: 3
+  retry_delay: 2
+  skip_on_error: true
+  log_errors: true

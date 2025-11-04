@@ -1,0 +1,182 @@
+# Shopify Platform Configuration
+platform: "shopify"
+api_version: "2025-07"
+
+# Authentication (loaded from environment or config)
+auth:
+  shop_url: "${SHOPIFY_SHOP_URL}"  # e.g., "https://your-store.myshopify.com"
+  access_token: "${SHOPIFY_ACCESS_TOKEN}"
+
+# API settings
+api:
+  rate_limit: 0.5  # seconds between requests
+  timeout: 30
+  max_retries: 3
+  batch_size: 250  # max products per request
+
+# Metafield definitions for wine products
+metafields:
+  - namespace: "wine"
+    key: "country"
+    name: "Country"
+    description: "Wine origin country"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "region"
+    name: "Region"
+    description: "Wine region"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "appellation"
+    name: "Appellation"
+    description: "Wine appellation"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "varietal"
+    name: "Varietal"
+    description: "Wine grape varietal"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "style"
+    name: "Style"
+    description: "Wine style"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "abv"
+    name: "Alcohol by Volume"
+    description: "ABV percentage"
+    type: "number_decimal"
+    
+  - namespace: "wine"
+    key: "taste_notes"
+    name: "Tasting Notes"
+    description: "Wine tasting notes"
+    type: "multi_line_text_field"
+    
+  - namespace: "wine"
+    key: "body"
+    name: "Body"
+    description: "Wine body (Light, Medium, Full)"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "mix_6_price"
+    name: "Mix 6 Price"
+    description: "Price when buying 6 bottles"
+    type: "money"
+    
+  - namespace: "wine"
+    key: "customer_rating"
+    name: "Customer Rating"
+    description: "Average customer rating"
+    type: "number_decimal"
+    
+  - namespace: "wine"
+    key: "customer_reviews"
+    name: "Customer Reviews"
+    description: "Number of customer reviews"
+    type: "number_integer"
+    
+  - namespace: "wine"
+    key: "expert_rating"
+    name: "Expert Rating"
+    description: "Expert rating and source"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "size"
+    name: "Bottle Size"
+    description: "Bottle size (e.g., 750ml)"
+    type: "single_line_text_field"
+    
+  - namespace: "wine"
+    key: "source_url"
+    name: "Source URL"
+    description: "Original product URL"
+    type: "url"
+    
+  - namespace: "wine"
+    key: "highlights"
+    name: "Product Highlights"
+    description: "Key product highlights"
+    type: "multi_line_text_field"
+
+# Collection templates
+collection_templates:
+  automated:
+    # Collections based on product attributes
+    - name: "Red Wines"
+      rules:
+        - column: "product_type"
+          relation: "equals"
+          condition: "Red Wine"
+    
+    - name: "White Wines"
+      rules:
+        - column: "product_type"
+          relation: "equals"
+          condition: "White Wine"
+          
+    - name: "Rosé Wines"
+      rules:
+        - column: "product_type"
+          relation: "equals"
+          condition: "Rosé Wine"
+  
+  smart:
+    # Smart collections with complex rules
+    - name: "Wine Under $25"
+      rules:
+        - column: "variant_price"
+          relation: "less_than"
+          condition: "25.00"
+        - column: "product_type"
+          relation: "contains"
+          condition: "Wine"
+          
+    - name: "Premium Wines"
+      rules:
+        - column: "variant_price"
+          relation: "greater_than"
+          condition: "50.00"
+        - column: "product_type"
+          relation: "contains"
+          condition: "Wine"
+
+# Product defaults
+defaults:
+  status: "active"
+  inventory_tracking: true
+  inventory_quantity: 100
+  inventory_policy: "deny"
+  requires_shipping: true
+  taxable: true
+  weight: 1.5  # kg for 750ml wine bottle
+  
+# Import settings
+import:
+  batch_size: 50
+  concurrent_requests: 3
+  skip_duplicates: true
+  update_existing: true
+  
+  # Image processing
+  images:
+    download: true
+    resize: true
+    max_width: 2048
+    max_height: 2048
+    quality: 85
+    formats: ["jpg", "jpeg", "png", "webp"]
+
+# Error handling
+error_handling:
+  continue_on_error: true
+  log_errors: true
+  skip_invalid_data: true
+  validate_before_import: true
