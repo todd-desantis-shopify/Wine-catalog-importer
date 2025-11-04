@@ -1,71 +1,73 @@
-# 🍷 E-commerce Catalog System for Shopify
+# 🕷️ Smart E-commerce Crawler for Shopify
 
-Simple, modular system for crawling product data and importing to Shopify.
-
-## ⚙️ Setup
-
-1. **Copy config template:**
-   ```bash
-   cp config_template.py config.py
-   # Edit config.py with your Shopify credentials
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Create product config:**
-   ```bash
-   cp config/products/product_template.yaml config/products/wine.yaml
-   ```
-   
-   **Edit to add extra fields** (standard fields automatic):
-   ```yaml
-   extra_fields:
-     - varietal
-     - region
-     - abv
-   ```
+Intelligent crawler that automatically figures out any e-commerce site and extracts product data.
 
 ## 🚀 Quick Start
 
-### 1. Crawl Products
+**Just give it a collection page URL:**
 ```bash
-# Create collections.txt with collection page URLs (see collections_template.txt)
-python3 crawler/simple_crawl.py --site totalwine --product wine --collections collections.txt --output wines.csv
+python3 smart_crawl.py \
+  --url "https://www.totalwine.com/wine/red-wine/c/000009" \
+  --output wines.csv
 ```
 
-### 2. Setup Shopify
+That's it. It automatically:
+1. Finds all product links on the collection page
+2. Crawls each product detail page
+3. Auto-extracts: title, price, msrp, brand, sku, image, description
+4. Outputs Shopify-ready CSV
+
+## ⚙️ Setup
+
 ```bash
-python3 setup/setup_shopify.py --product wine
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Optional: Add product-specific fields
+cp config/products/product_template.yaml config/products/wine.yaml
 ```
 
-### 3. Import to Shopify  
+Edit `wine.yaml` to add extra fields:
+```yaml
+extra_fields:
+  - varietal
+  - region
+  - abv
+```
+
+Then run with `--product wine` to extract those too.
+
+## 📊 What Gets Extracted
+
+**Standard fields (automatic):**
+- title
+- price
+- msrp (compare at price)
+- brand
+- sku
+- image_url
+- description
+- collection
+
+**Extra fields (optional):**
+- Whatever you add in `config/products/YOURTYPE.yaml`
+
+## 🎯 Examples
+
 ```bash
-python3 import_wines.py  # Uses existing importer with CSV
+# Basic - just standard fields
+python3 smart_crawl.py --url "https://site.com/collection" --output products.csv
+
+# With product-specific fields
+python3 smart_crawl.py --url "https://site.com/wines" --product wine --output wines.csv
+
+# Limit to first 10 products
+python3 smart_crawl.py --url "https://site.com/collection" --output test.csv --limit 10
 ```
 
-## 📁 Structure
+## 🎉 Import to Shopify
 
+```bash
+# Use your existing importer
+python3 import_wines.py
 ```
-crawler/          # Crawls any e-commerce site → CSV
-setup/            # Creates Shopify metafields/collections  
-config/           # Site & product configurations (YAML)
-*.csv             # Your wine catalog data
-shopify_wine_importer.py  # Shopify import (your existing code)
-```
-
-## ⚙️ Configuration
-
-All site-specific selectors in `config/sites/*.yaml`  
-All product fields in `config/products/*.yaml`
-
-Change selectors without touching code.
-
-## 🎯 Current Setup
-
-- **70 wines** imported to Shopify
-- **100% image coverage**
-- **2 wines** with real compare-at pricing
-- **All authentic data** from Total Wine
