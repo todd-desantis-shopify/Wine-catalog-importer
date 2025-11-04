@@ -1,75 +1,17 @@
-# Generic Product Configuration Template
-# Copy this file and customize for your product type:
-#   cp product_template.yaml wine.yaml
-#   cp product_template.yaml electronics.yaml
-#   etc.
+# Generic Product Configuration
+# Copy this file: cp product_template.yaml yourproduct.yaml
 
-product_type: "generic"  # Change this to your product type
+product_type: "generic"
 
-# Fields to extract and import to Shopify
-# Customize this list for your specific product type
-fields:
-  # Required fields (all products need these)
-  - name: "name"
-    type: "string"
-    required: true
-    enabled: true
-    shopify_field: "title"
-    
-  - name: "brand"
-    type: "string" 
-    required: true
-    enabled: true
-    shopify_field: "vendor"
-    
-  - name: "price"
-    type: "money"
-    required: true
-    enabled: true
-    shopify_field: "variant.price"
-    
-  - name: "sku"
-    type: "string"
-    required: true
-    enabled: true
-    shopify_field: "variant.sku"
-    
-  - name: "image_url"
-    type: "string" 
-    required: false
-    enabled: true
-    shopify_field: "images"
+# Extra fields to extract (beyond the standard ones)
+# Standard fields are always included: title, price, collection, description, msrp, brand, sku, image_url
+# 
+# Just list the field names you want, one per line:
+extra_fields:
+  - custom_field_1
+  - custom_field_2
   
-  # Optional common fields
-  - name: "description"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_field: "body_html"
-  
-  - name: "compare_at_price"
-    type: "money"
-    required: false
-    enabled: true
-    shopify_field: "variant.compare_at_price"
-  
-  # Product-specific fields (customize per product type)
-  # For WINE, you might add:
-  #   - name: "varietal"
-  #     shopify_metafield: "wine.varietal"
-  #   - name: "region"
-  #     shopify_metafield: "wine.region"
-  #
-  # For ELECTRONICS, you might add:
-  #   - name: "model"
-  #     shopify_metafield: "electronics.model"
-  #   - name: "specs"
-  #     shopify_metafield: "electronics.specs"
-  #
-  # Add your custom fields below:
-  
-  - name: "custom_field_1"
-    type: "string"
-    required: false
-    enabled: false    # Set to true when you define this field
-    shopify_metafield: "custom.field_1"
+# Examples:
+# For wine: varietal, region, country, abv, taste_notes, wine_type
+# For electronics: model, specs, warranty, dimensions, weight
+# For clothing: size, color, material, fit, care_instructions

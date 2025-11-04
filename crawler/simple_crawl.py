@@ -135,29 +135,29 @@ async def crawl_product_details(product_urls: List[str], site_config: dict, prod
     return products
 
 def extract_product_data(html: str, url: str, site_config: dict, product_config: dict) -> dict:
-    """Extract product data from HTML based on enabled fields"""
+    """Extract product data from HTML"""
     soup = BeautifulSoup(html, 'html.parser')
-    selectors = site_config.get('selectors', {})
     
-    product = {'url': url}
+    product = {}
     
-    # Get enabled fields from product config
-    enabled_fields = [f['name'] for f in product_config['fields'] if f.get('enabled', True)]
+    # Standard fields (always extract these)
+    h1 = soup.find('h1')
+    product['title'] = h1.get_text(strip=True) if h1 else ''
     
-    # Extract only enabled fields
-    if 'name' in enabled_fields:
-        h1 = soup.find('h1')
-        product['name'] = h1.get_text(strip=True) if h1 else ''
+    product['sku'] = extract_sku_from_url(url)
     
-    if 'sku' in enabled_fields:
-        product['sku'] = extract_sku_from_url(url)
+    price_match = re.search(r'\$(\d+\.\d{2})', soup.get_text())
+    product['price'] = price_match.group(1) if price_match else ''
     
-    if 'price' in enabled_fields:
-        price_match = re.search(r'\$(\d+\.\d{2})', soup.get_text())
-        product['price'] = price_match.group(1) if price_match else ''
+    product['brand'] = ''  # Extract from page
+    product['collection'] = ''  # Determine from URL or page
+    product['description'] = ''  # Extract from page  
+    product['msrp'] = ''  # Compare at price
+    product['image_url'] = ''  # Extract image
     
-    # Add more field extraction here based on selectors...
-    # This is where site-specific CSS selectors would be used
+    # Extra fields from product config
+    for field_name in product_config.get('extra_fields', []):
+        product[field_name] = ''  # Extract based on selectors
     
     return product
 
@@ -167,19 +167,21 @@ def extract_sku_from_url(url: str) -> str:
     return match.group(1) if match else ''
 
 def write_shopify_csv(products: List[dict], output_file: str, product_config: dict):
-    """Write Shopify-compatible CSV with only enabled fields"""
+    """Write Shopify-compatible CSV"""
     
-    # Get enabled field names
-    enabled_fields = [f['name'] for f in product_config['fields'] if f.get('enabled', True)]
+    # Standard fields (always included)
+    standard_fields = ['title', 'price', 'collection', 'description', 'msrp', 'brand', 'sku', 'image_url']
+    
+    # Extra fields from product config
+    extra_fields = product_config.get('extra_fields', [])
+    
+    # All columns
+    all_fields = standard_fields + extra_fields
     
     with open(output_file, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=enabled_fields, extrasaction='ignore')
+        writer = csv.DictWriter(f, fieldnames=all_fields, extrasaction='ignore')
         writer.writeheader()
-        
-        for product in products:
-            # Only write enabled fields
-            row = {k: v for k, v in product.items() if k in enabled_fields}
-            writer.writerow(row)
+        writer.writerows(products)
 
 async def main():
     parser = argparse.ArgumentParser(description="Simple Shopify Crawler - Collection Pages")

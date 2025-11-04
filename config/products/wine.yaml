@@ -1,109 +1,21 @@
-# Generic Product Configuration Template
-# Copy this file and customize for your product type:
-#   cp product_template.yaml wine.yaml
-#   cp product_template.yaml electronics.yaml
-#   etc.
+# Wine Product Configuration
 
 product_type: "wine"
 
-# Fields to extract and import to Shopify
-# Customize this list for your specific product type
-fields:
-  # Required fields (all products need these)
-  - name: "name"
-    type: "string"
-    required: true
-    enabled: true
-    shopify_field: "title"
-    
-  - name: "brand"
-    type: "string" 
-    required: true
-    enabled: true
-    shopify_field: "vendor"
-    
-  - name: "price"
-    type: "money"
-    required: true
-    enabled: true
-    shopify_field: "variant.price"
-    
-  - name: "sku"
-    type: "string"
-    required: true
-    enabled: true
-    shopify_field: "variant.sku"
-    
-  - name: "image_url"
-    type: "string" 
-    required: false
-    enabled: true
-    shopify_field: "images"
-  
-  # Optional common fields
-  - name: "description"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_field: "body_html"
-  
-  - name: "compare_at_price"
-    type: "money"
-    required: false
-    enabled: true
-    shopify_field: "variant.compare_at_price"
-  
-  # Wine-specific fields
-  - name: "varietal"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.varietal"
-    
-  - name: "region"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.region"
-    
-  - name: "country"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.country"
-    
-  - name: "wine_type"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.wine_type"
-    
-  - name: "abv"
-    type: "number_decimal"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.abv"
-    
-  - name: "taste_notes"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.taste_notes"
-    
-  - name: "mix_6_price"
-    type: "money"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.mix_6_price"
-    
-  - name: "customer_rating"
-    type: "number_decimal"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.customer_rating"
-    
-  - name: "expert_rating"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.expert_rating"
+# Extra fields beyond the standard ones
+# Standard fields (always included): title, price, collection, description, msrp, brand, sku, image_url
+extra_fields:
+  - varietal
+  - region
+  - country
+  - wine_type
+  - abv
+  - taste_notes
+  - body
+  - style
+  - mix_6_price
+  - customer_rating
+  - customer_reviews
+  - expert_rating
+  - appellation
+  - size

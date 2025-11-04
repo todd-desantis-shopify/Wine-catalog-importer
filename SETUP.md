@@ -34,43 +34,37 @@ The crawler will:
 3. Crawl each product page
 4. Output Shopify CSV
 
-## 3. Create Product Config for What You're Crawling
+## 3. Create Product Config
 
 **Copy the template:**
 ```bash
-cp config/products/product_template.yaml config/products/YOURTYPE.yaml
-```
-
-**Examples:**
-```bash
-# For wine products
 cp config/products/product_template.yaml config/products/wine.yaml
-
-# For electronics  
-cp config/products/product_template.yaml config/products/electronics.yaml
-
-# For clothing
-cp config/products/product_template.yaml config/products/clothing.yaml
 ```
 
-**Edit the file** to add your product-specific fields:
+**Edit to add extra fields:**
 ```yaml
-product_type: "wine"  # or electronics, clothing, etc.
+product_type: "wine"
 
-fields:
-  # Common fields (all products have these)
-  - name: "name"
-    enabled: true
-  - name: "price"
-    enabled: true
-  
-  # Wine-specific fields
-  - name: "varietal"
-    enabled: true
-    shopify_metafield: "wine.varietal"
-  - name: "region"
-    enabled: true
-    shopify_metafield: "wine.region"
+extra_fields:
+  - varietal
+  - region
+  - abv
+  - taste_notes
+```
+
+**Standard fields are automatic:**
+- title, price, collection, description, msrp, brand, sku, image_url
+
+**Examples for different products:**
+```yaml
+# Wine
+extra_fields: [varietal, region, country, abv, wine_type]
+
+# Electronics
+extra_fields: [model, specs, warranty, dimensions]
+
+# Clothing
+extra_fields: [size, color, material, fit]
 ```
 
 **For different sites:**
