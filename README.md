@@ -15,10 +15,12 @@ Simple, modular system for crawling product data and importing to Shopify.
    pip install -r requirements.txt
    ```
 
-3. **Customize fields to extract** (per product type):
-   - Edit `config/products/wine.yaml`
-   - Set `enabled: true` for fields you want
-   - Set `enabled: false` to skip fields
+3. **Create product config** for what you're crawling:
+   ```bash
+   cp config/products/product_template.yaml config/products/YOURPRODUCT.yaml
+   # Edit to add your product-specific fields
+   # e.g., wine.yaml, electronics.yaml, clothing.yaml
+   ```
 
 ## 🚀 Quick Start
 

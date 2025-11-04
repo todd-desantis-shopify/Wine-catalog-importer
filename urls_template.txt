@@ -1,0 +1,14 @@
+# Collection Page URLs - One collection/listing page URL per line
+# Copy this to collections.txt and add your collection page URLs
+
+# Example Total Wine collection pages:
+https://www.totalwine.com/wine/red-wine/c/000009
+https://www.totalwine.com/wine/white-wine/c/000002
+https://www.totalwine.com/wine/rose-wine/c/000003
+
+# Example varietal collection pages:
+https://www.totalwine.com/wine/red-wine/cabernet-sauvignon/c/000011
+https://www.totalwine.com/wine/white-wine/chardonnay/c/000004
+
+# Add your collection page URLs below (one per line):
+

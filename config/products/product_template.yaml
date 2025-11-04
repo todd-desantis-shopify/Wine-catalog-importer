@@ -4,7 +4,7 @@
 #   cp product_template.yaml electronics.yaml
 #   etc.
 
-product_type: "wine"
+product_type: "generic"  # Change this to your product type
 
 # Fields to extract and import to Shopify
 # Customize this list for your specific product type
@@ -53,57 +53,23 @@ fields:
     enabled: true
     shopify_field: "variant.compare_at_price"
   
-  # Wine-specific fields
-  - name: "varietal"
+  # Product-specific fields (customize per product type)
+  # For WINE, you might add:
+  #   - name: "varietal"
+  #     shopify_metafield: "wine.varietal"
+  #   - name: "region"
+  #     shopify_metafield: "wine.region"
+  #
+  # For ELECTRONICS, you might add:
+  #   - name: "model"
+  #     shopify_metafield: "electronics.model"
+  #   - name: "specs"
+  #     shopify_metafield: "electronics.specs"
+  #
+  # Add your custom fields below:
+  
+  - name: "custom_field_1"
     type: "string"
     required: false
-    enabled: true
-    shopify_metafield: "wine.varietal"
-    
-  - name: "region"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.region"
-    
-  - name: "country"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.country"
-    
-  - name: "wine_type"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.wine_type"
-    
-  - name: "abv"
-    type: "number_decimal"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.abv"
-    
-  - name: "taste_notes"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.taste_notes"
-    
-  - name: "mix_6_price"
-    type: "money"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.mix_6_price"
-    
-  - name: "customer_rating"
-    type: "number_decimal"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.customer_rating"
-    
-  - name: "expert_rating"
-    type: "string"
-    required: false
-    enabled: true
-    shopify_metafield: "wine.expert_rating"
+    enabled: false    # Set to true when you define this field
+    shopify_metafield: "custom.field_1"

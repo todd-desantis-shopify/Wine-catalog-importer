@@ -34,26 +34,44 @@ The crawler will:
 3. Crawl each product page
 4. Output Shopify CSV
 
-## 3. Customize Fields to Extract
+## 3. Create Product Config for What You're Crawling
 
-**Edit `config/products/wine.yaml`** (or create new product configs):
-
-Turn fields on/off:
-```yaml
-fields:
-  - name: "name"
-    enabled: true       # Include this field
-    required: true
-  
-  - name: "expert_rating"
-    enabled: false      # Skip this field
-    required: false
+**Copy the template:**
+```bash
+cp config/products/product_template.yaml config/products/YOURTYPE.yaml
 ```
 
-**For different product types:**
-- Copy `config/products/wine.yaml` → `config/products/electronics.yaml`
-- Update fields list for electronics (model, specs, warranty, etc.)
-- Set `enabled: true` for fields that product type has
+**Examples:**
+```bash
+# For wine products
+cp config/products/product_template.yaml config/products/wine.yaml
+
+# For electronics  
+cp config/products/product_template.yaml config/products/electronics.yaml
+
+# For clothing
+cp config/products/product_template.yaml config/products/clothing.yaml
+```
+
+**Edit the file** to add your product-specific fields:
+```yaml
+product_type: "wine"  # or electronics, clothing, etc.
+
+fields:
+  # Common fields (all products have these)
+  - name: "name"
+    enabled: true
+  - name: "price"
+    enabled: true
+  
+  # Wine-specific fields
+  - name: "varietal"
+    enabled: true
+    shopify_metafield: "wine.varietal"
+  - name: "region"
+    enabled: true
+    shopify_metafield: "wine.region"
+```
 
 **For different sites:**
 - Copy `config/sites/totalwine.yaml` → `config/sites/amazon.yaml`  
