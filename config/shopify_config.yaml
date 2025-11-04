@@ -1,0 +1,22 @@
+# Shopify Store Configuration
+shopify:
+  shop_url: "${SHOPIFY_SHOP_URL}"
+  access_token: "${SHOPIFY_ACCESS_TOKEN}"
+  api_version: "2025-07"
+  
+# Import settings
+import:
+  batch_size: 50
+  rate_limit: 0.5
+  max_retries: 3
+  skip_duplicates: true
+  
+# Product defaults
+defaults:
+  status: "active"
+  inventory_tracking: true
+  inventory_quantity: 100
+  inventory_policy: "deny"
+  requires_shipping: true
+  taxable: true
+  weight: 1.5
