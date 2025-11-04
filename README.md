@@ -1,73 +1,43 @@
 # 🕷️ Smart E-commerce Crawler for Shopify
 
-Intelligent crawler that automatically figures out any e-commerce site and extracts product data.
+Automatically extracts product data from any e-commerce site using AI + browser automation.
 
-## 🚀 Quick Start
+## 🚀 Quick Start (For Teammates)
 
-**Just give it a collection page URL:**
+### Setup (One Time):
 ```bash
-python3 smart_crawl.py \
-  --url "https://www.totalwine.com/wine/red-wine/c/000009" \
-  --output wines.csv
-```
-
-That's it. It automatically:
-1. Finds all product links on the collection page
-2. Crawls each product detail page
-3. Auto-extracts: title, price, msrp, brand, sku, image, description
-4. Outputs Shopify-ready CSV
-
-## ⚙️ Setup
-
-```bash
-# 1. Install dependencies
+git clone <repo>
+cd "Wine Catalog"
 pip install -r requirements.txt
-
-# 2. Optional: Add product-specific fields
-cp config/products/product_template.yaml config/products/wine.yaml
 ```
 
-Edit `wine.yaml` to add extra fields:
-```yaml
-extra_fields:
-  - varietal
-  - region
-  - abv
+In Cursor:
+1. Click browser extension icon → Connect
+2. Open this folder in Cursor
+
+### Usage:
+**In Cursor chat, just say:**
+```
+Crawl this collection page: https://site.com/products
 ```
 
-Then run with `--product wine` to extract those too.
+The AI will:
+- Navigate to the page with the browser
+- Extract all product links
+- Visit each product page
+- Extract: title, price, msrp, brand, sku, image, description
+- Save to `{site}_{category}.csv`
 
-## 📊 What Gets Extracted
+That's it! CSV is ready to import to Shopify.
 
-**Standard fields (automatic):**
-- title
-- price
-- msrp (compare at price)
-- brand
-- sku
-- image_url
-- description
-- collection
+## 📋 For AI Context
 
-**Extra fields (optional):**
-- Whatever you add in `config/products/YOURTYPE.yaml`
+Include `CRAWLING_INSTRUCTIONS.md` in your Cursor context so the AI knows how to crawl when you provide a URL.
 
-## 🎯 Examples
+## 🎯 What It Does
 
-```bash
-# Basic - just standard fields
-python3 smart_crawl.py --url "https://site.com/collection" --output products.csv
-
-# With product-specific fields
-python3 smart_crawl.py --url "https://site.com/wines" --product wine --output wines.csv
-
-# Limit to first 10 products
-python3 smart_crawl.py --url "https://site.com/collection" --output test.csv --limit 10
-```
-
-## 🎉 Import to Shopify
-
-```bash
-# Use your existing importer
-python3 import_wines.py
-```
+- **Auto-detects** product links on collection pages
+- **Auto-extracts** standard Shopify fields from any site
+- **Bypasses bot protection** using real browser
+- **Outputs Shopify CSV** ready to import
+- **No config files needed** - just works!
