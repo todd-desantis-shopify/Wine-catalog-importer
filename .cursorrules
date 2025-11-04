@@ -1,0 +1,29 @@
+# Smart E-commerce Crawler - Auto-Crawling Instructions
+
+When the user provides a collection/listing page URL and asks to crawl it:
+
+## Steps to Execute:
+
+1. **Navigate** to the collection page using browser_navigate
+2. **Extract product URLs** from the browser snapshot (look for product detail page links)
+3. **For each product** (limit to 10-20 unless user specifies more):
+   - Navigate to product URL
+   - Extract from snapshot:
+     * title (from h1/heading)
+     * price (look for $ pattern)
+     * msrp (look for "was", "originally", "list price", "compare at")
+     * brand (from page text or auto-detect)
+     * sku (from URL pattern or page)
+     * image_url (main product image src)
+     * description (product description text)
+     * collection (from breadcrumbs or URL path)
+4. **Save to CSV** in Shopify format: `{site}_{category}.csv`
+
+## Standard Fields (Always Include):
+title, price, collection, description, msrp, brand, sku, image_url
+
+## Extra Fields:
+Auto-detect and include any product-specific fields (size, color, unit, etc.)
+
+## Output Format:
+Shopify-compatible CSV ready for import with shopify_wine_importer.py
