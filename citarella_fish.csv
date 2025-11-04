@@ -1,13 +1,13 @@
-title,price,collection,description,msrp,brand,sku,image_url,unit,stock_status
-Eel Whole,27.99,Whole Fish,"Exotic eel with rich, succulent flavor. Wild caught from United States. Special order item.",,Citarella,wild-eel-whole,https://www.citarella.com/media/catalog/product/e/e/eel_whole.jpg,1 lb,
-Wild Shad Roe,28.99,Whole Fish,Fresh wild shad roe. 2 pieces (approx. 8-10 ounces per piece),,Citarella,wild-shad-roe,,2 pieces,Out of stock
-Tuscan Branzino Whole,17.99,Whole Fish,Fresh Tuscan branzino. Approx. 1 lb per fish,,Citarella,tuscan-branzino-whole,,1 fish,
-Arctic Char Whole,95.99,Whole Fish,Fresh arctic char. Approx. 4-6 lbs per fish,,Citarella,arctic-charr-whole,,1 fish,
-European Anchovies,19.99,Whole Fish,Wild European anchovies. 16-18 per pound,,Citarella,wild-european-anchovies,,1 lb,
-Black Cod Whole,137.99,Whole Fish,Wild black cod whole. Approx. 4-6 lbs per fish,,Citarella,wild-black-cod-whole,,1 fish,
-Blackfish Whole,29.99,Whole Fish,Wild blackfish whole. Approx. 2 lbs per fish,,Citarella,wild-blackfish-whole,,1 fish,
-Black Sea Bass Whole,31.99,Whole Fish,Wild black sea bass whole. Approx. 2 lbs per fish,,Citarella,wild-black-sea-bass-whole,,1 fish,
-Striped Bass Whole,169.99,Whole Fish,Wild striped bass whole. Approx. 10 lbs per fish,,Citarella,wild-striped-bass-whole,,1 fish,
-Hybrid Striped Bass Whole,38.99,Whole Fish,Striped bass whole. Approx. 2-3 lbs per fish,,Citarella,striped-bass-whole,,1 fish,
-Bluefish Whole,26.99,Whole Fish,Wild bluefish whole. Approx. 2-3 lbs per fish,,Citarella,wild-bluefish-whole,,1 fish,
-Butterfish Whole,21.99,Whole Fish,Wild butterfish whole. Approx. 4-6 ounces per fish,,Citarella,wild-butterfish-whole,,2 lbs,
+title,price,collection,description,msrp,brand,sku,image_url,unit,stock_status,origin,wild_caught,weight_range
+Eel Whole,27.99,Whole Fish,"Exotic, perhaps. Unique, for sure. Rich and succulent flavor of eel that is mildly sweet with a hint of earthiness. Deep frying makes crisp and crunchy, poaching yields softer texture, grilled is tender with satisfying chew.",,Citarella,wild-eel-whole,https://www.citarella.com/media/catalog/product/e/e/eel_whole.jpg,1 lb,,United States,Yes,
+Wild Shad Roe,28.99,Whole Fish,Fresh wild shad roe.,,Citarella,wild-shad-roe,,2 pieces (approx. 8-10 ounces per piece),Out of stock,,Yes,8-10 oz per piece
+Tuscan Branzino Whole,17.99,Whole Fish,"A Citarella Exclusive! Enjoy on your plate in less than 24 hours after it leaves the water! Tender, flaky meat that is mild, sweet, and juicy.",,Citarella,tuscan-branzino-whole,,1 fish (approx. 1 lb per fish),,Italy,No,1 lb
+Arctic Char Whole,95.99,Whole Fish,"Native to the icy, northernmost waters of North America and Europe, arctic char is robust, rich red to rosé pink fleshed fish. Norway-sourced, sustainably farmed, perfect for smoking Scandinavian-style. Kosher-friendly.",,Citarella,arctic-charr-whole,,1 fish (approx. 4-6 lbs per fish),,Iceland,No,4-6 lbs
+European Anchovies,19.99,Whole Fish,Wild European anchovies. 16-18 per pound,,Citarella,wild-european-anchovies,,1 lb (16-18 per pound),,,Yes,
+Black Cod Whole,137.99,Whole Fish,Wild black cod whole.,,Citarella,wild-black-cod-whole,,1 fish (approx. 4-6 lbs per fish),,,Yes,4-6 lbs
+Blackfish Whole,29.99,Whole Fish,Wild blackfish whole.,,Citarella,wild-blackfish-whole,,1 fish (approx. 2 lbs per fish),,,Yes,2 lbs
+Black Sea Bass Whole,31.99,Whole Fish,Wild black sea bass whole.,,Citarella,wild-black-sea-bass-whole,,1 fish (approx. 2 lbs per fish),,,Yes,2 lbs
+Striped Bass Whole,169.99,Whole Fish,Wild striped bass whole.,,Citarella,wild-striped-bass-whole,,1 fish (approx. 10 lbs per fish),,,Yes,10 lbs
+Hybrid Striped Bass Whole,38.99,Whole Fish,Striped bass whole.,,Citarella,striped-bass-whole,,1 fish (approx. 2-3 lbs per fish),,,,2-3 lbs
+Bluefish Whole,26.99,Whole Fish,Wild bluefish whole.,,Citarella,wild-bluefish-whole,,1 fish (approx. 2-3 lbs per fish),,,Yes,2-3 lbs
+Butterfish Whole,21.99,Whole Fish,Wild butterfish whole.,,Citarella,wild-butterfish-whole,,2 lbs (approx. 4-6 ounces per fish),,,Yes,4-6 oz

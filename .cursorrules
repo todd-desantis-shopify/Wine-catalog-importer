@@ -7,8 +7,8 @@ When the user provides a collection/listing page URL and asks to crawl it:
 1. **Navigate** to the collection page using browser_navigate
 2. **Extract product URLs** from the browser snapshot (look for product detail page links)
 3. **For each product** (limit to 10-20 unless user specifies more):
-   - Navigate to product URL
-   - Extract from snapshot:
+   - **Navigate to the PDP** (product detail page) - ALWAYS visit the PDP, don't just use collection page data
+   - Extract from PDP snapshot:
      * title (from h1/heading)
      * price (look for $ pattern)
      * msrp (look for "was", "originally", "list price", "compare at")

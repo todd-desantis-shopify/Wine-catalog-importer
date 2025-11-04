@@ -1,0 +1,13 @@
+# Fish Product Configuration
+
+product_type: "fish"
+
+# Extra fields beyond standard ones
+# Standard fields (always included): title, price, collection, description, msrp, brand, sku, image_url
+extra_fields:
+  - unit
+  - stock_status
+  - origin
+  - wild_caught
+  - weight_range
+
