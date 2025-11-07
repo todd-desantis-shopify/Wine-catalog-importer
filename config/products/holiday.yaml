@@ -1,0 +1,13 @@
+# Holiday Menu Product Configuration
+
+product_type: "holiday"
+
+# Extra fields for holiday menu items
+extra_fields:
+  - category
+  - cooking_preparation
+  - flavor
+  - seasonality
+  - fish_texture
+  - serves
+
